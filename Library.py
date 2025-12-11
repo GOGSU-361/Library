@@ -18,7 +18,7 @@ class Kütüphane():
         self.books.remove(q1)
 
     def search_by_name(self,name_search):
-        if name_search.lower() not in [i.name for i in self.books]:print(f"\033[34m{name_search.title()} Adlı Kitap Bulunamadı.\033[0m")
+        if name_search.lower() not in [i.name for i in self.books]:print(f"\033[34m{name_search.title()}\033[0m Adlı Kitap \033[3mBulunamadı.\033[0m")
         for book in self.books:
             if book.name.lower()==name_search.lower():
                 print("\n\033[34mArama Sonuçları:\033[0m")
@@ -27,7 +27,7 @@ class Kütüphane():
     
     def search_by_author(self,author_search):
         if author_search.lower() not in [i.author.lower() for i in library.books]:
-            print(f"\033[34m{author_search.title()}\033[0m Adlı Yazarın Hiçbir Kitabı Bulunamamıştır.")
+            print(f"\033[34m{author_search.title()}\033[0m Adlı Yazarın Hiçbir Kitabı \033[3mBulunamadı.\033[0m")
         else:
             print("\n\033[34mArama Sonuçları:\033[0m")
             for book in self.books:
@@ -45,6 +45,7 @@ library=Kütüphane()
 
 print("Kütüphane Kitap Arama Sistemi")
 while True:
+    mevcut=False
     try:
         choice=int(input("\n\n1. Kitap Ekle\n2. Kitap Sil\n3. Kitap Ara (İsme Göre)\n4. Kitap Ara (Yazara Göre)\n5. Tüm Kitapları Listele\n6. Çıkış\n>>\033[33mİşlem Seçiniz (1-6)\033[0m"))
         if choice>6 or choice<1:
@@ -53,15 +54,21 @@ while True:
         print("\033[33mGeçerli Bir İşlem Seçiniz\033[0m")
         continue
     if choice==1:
-        a=input("Kitap Adı:")
-        b=input("Yazar:")
+        a=input("Kitap Adı:").lower()
+        b=input("Yazar:").lower()
         try:
             c=int(input("Yayın Yılı:"))
         except:
             print("\033[33mGeçerli Bir Yayın Yılı Giriniz\033[0m")
             continue
-        library.add_book(Kitap(a,b,c))
-        print("\033[32m{}\033[0m Başarıyla Kütüphaneye \033[42mEklendi\033[0m".format(a.title()))
+        for book in library.books:
+            if (book.name==a and book.author==b) and book.year==c:
+                mevcut=True
+        if mevcut:print(">>\033[33mMevcut Kitap!\033[0m Bir Kitap Birden Fazla Eklenemez")
+        else:
+            library.add_book(Kitap(a,b,c))
+            print("\033[32m{}\033[0m Başarıyla Kütüphaneye \033[42mEklendi\033[0m".format(a.title()))
+        
 
     elif choice==2:
         d=input("Kitap Adı (SİLİNECEK!!):")
@@ -81,6 +88,7 @@ while True:
         library.search_by_author(searchA)
 
     elif choice==5:
+        print()
         library.list_all()
 
     elif choice==6:
