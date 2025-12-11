@@ -35,7 +35,9 @@ class Kütüphane():
                     print(book)
     
     def list_all(self):
-        if len(self.books)!=0:[print(book) for book in self.books]
+        if len(self.books)!=0:
+            print("\033[34m\033[4mTüm Kitaplar \033[0m")
+            [print(book) for book in self.books]
         else:print("\033[34mKütüphanede Listelenecek Kitap Bulunmamaktadır.\033[0m")
         
 
