@@ -5,7 +5,7 @@ class Kitap():
         self.year=year
     
     def __str__(self):
-        return f"\033[34mKitap Adı:\033[0m {self.name}   \033[34mYazar:\033[0m {self.author}   \033[34mYıl:\033[0m {self.year}"
+        return f"\033[34mKitap Adı:\033[0m {self.name.title()}   \033[34mYazar:\033[0m {self.author.title()}   \033[34mYıl:\033[0m {self.year}"
 
 class Kütüphane():
     def __init__(self):
