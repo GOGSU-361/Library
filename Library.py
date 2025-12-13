@@ -77,7 +77,7 @@ while True:
                 if d.lower()==i.name.lower():    
                     print("\033[31m{}\033[0m Kütüphaneden Başarıyla \033[41mSilindi!\033[0m".format(d.title()))
                     library.remove_book(i)
-        else:print(f"\033[34m{d.title()} Adlı Kitap Bulunamadı.")
+        else:print(f"\033[34m{d.title()} Adlı Kitap Bulunamadı.\033[0m")
 
     elif choice==3:
         searchN=input("Aradığınız Kitabın Adını Girin:")
